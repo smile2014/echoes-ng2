@@ -1,10 +1,10 @@
 import { Observable } from 'rxjs/Rx';
 // reducers
-import { playerRegister, YoutubePlayerState } from './youtube-player';
-import { nowPlaylistRegister, YoutubeMediaPlaylist } from './now-playlist';
-import { userRegister, UserProfileData } from './user-profile';
-import { searchRegister, PlayerSearch } from './player-search';
-import { appLayoutRegister, AppLayout } from './app-layout';
+import { playerRegister, YoutubePlayerState, player, PlayerActions } from './youtube-player';
+import { nowPlaylistRegister, YoutubeMediaPlaylist, nowPlaylist, NowPlaylistActions } from './now-playlist';
+import { userRegister, UserProfileData, user, UserProfileActions } from './user-profile';
+import { searchRegister, PlayerSearch, search, PlayerSearchActions } from './player-search';
+import { appLayoutRegister, AppLayout, appLayout, AppLayoutActions } from './app-layout';
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
@@ -17,6 +17,22 @@ export interface EchoesState {
   search: PlayerSearch;
   appLayout: AppLayout;
 };
+
+export let EchoesReducers = {
+  player,
+  nowPlaylist,
+  user,
+  search,
+  appLayout,
+};
+
+export let EchoesActions = [
+  PlayerActions,
+  NowPlaylistActions,
+  UserProfileActions,
+  PlayerSearchActions,
+  AppLayoutActions
+];
 
 export function getAppReducersRegistry() {
   return [

@@ -10,22 +10,22 @@ import { combineReducers } from '@ngrx/store';
 import { compose } from '@ngrx/core/compose';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { getSidebarExpanded } from './app-layout';
-import { registerReducers } from './store.registry';
+// import { registerReducers } from './store.registry';
 
-import { getAppReducersRegistry, EchoesState } from './reducers';
+import { getAppReducersRegistry, EchoesState, EchoesReducers, EchoesActions } from './reducers';
 
 import { localStorageSync } from 'ngrx-store-localstorage';
 
 export { EchoesState } from './reducers';
-const storeAssets = registerReducers(getAppReducersRegistry());
-const actions = storeAssets.actions;
-const reducers = storeAssets.reducers;
+// const storeAssets = registerReducers(getAppReducersRegistry());
+const actions = EchoesActions; //storeAssets.actions;
+const reducers = EchoesReducers; //storeAssets.reducers;
 
 const composeStore = compose(
   localStorageSync(['videos', 'player', 'nowPlaylist', 'search', 'appLayout'], true),
   combineReducers
 )(reducers);
-
+// const composeStore = EchoesReducers;
 const optionalImports = [];
 
 // if ('production' !== ENV) {

@@ -17,7 +17,7 @@ const AppEffects = [
 @NgModule({
   imports: [
     CoreStoreModule,
-    ...AppEffects,
+    // ...AppEffects,
   ],
   declarations: [
   ],
@@ -29,7 +29,7 @@ const AppEffects = [
   ]
 })
 export class CoreModule {
-  constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
-    throwIfAlreadyLoaded(parentModule, 'CoreModule');
-  }
+  // constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
+  //   throwIfAlreadyLoaded(parentModule, 'CoreModule');
+  // }
 }

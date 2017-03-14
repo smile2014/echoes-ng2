@@ -20,12 +20,18 @@ export { EchoesState } from './reducers';
 // const storeAssets = registerReducers(getAppReducersRegistry());
 const actions = EchoesActions; //storeAssets.actions;
 const reducers = EchoesReducers; //storeAssets.reducers;
-
-const composeStore = compose(
-  localStorageSync(['videos', 'player', 'nowPlaylist', 'search', 'appLayout'], true),
-  combineReducers
-)(reducers);
-// const composeStore = EchoesReducers;
+const storageConfig = ['videos', 'player', 'nowPlaylist', 'search', 'appLayout'];
+// TODO - error thrown with compose 
+// ERROR in Error encountered resolving symbol values statically. 
+//Function calls are not supported. 
+//Consider replacing the function or lambda with a reference to an exported function 
+//(position 12:42 in the original .ts file), resolving symbol compose in 
+// /Projects/echoes-player/node_modules/@ngrx/core/compose.d.ts, 
+// const composeStore = compose(
+  // localStorageSync(storageConfig, true),
+  // combineReducers
+// )(reducers);
+const composeStore = reducers;
 const optionalImports = [];
 
 // if ('production' !== ENV) {
@@ -47,4 +53,6 @@ export class CoreStoreModule {};
 function getAppLayoutState(state$: Observable<EchoesState>) {
   return state$.select(state => state.appLayout);
 }
-export const getSidebarCollapsed$ = compose(getSidebarExpanded, getAppLayoutState);
+export function getSidebarCollapsed$(state$: Observable<EchoesState>) {
+  return state$.select((state) => state.appLayout.sidebarExpanded);
+}

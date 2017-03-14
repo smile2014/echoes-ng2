@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 // import './youtube-media.scss';
 
 interface MediaStatus {
@@ -8,6 +8,7 @@ interface MediaStatus {
 
 @Component({
   selector: 'youtube-media',
+  encapsulation: ViewEncapsulation.None,
   styleUrls: [ './youtube-media.scss' ],
   templateUrl: './youtube-media.html',
   changeDetection: ChangeDetectionStrategy.OnPush

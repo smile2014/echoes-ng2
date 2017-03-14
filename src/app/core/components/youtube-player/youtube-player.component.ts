@@ -1,21 +1,25 @@
 import { EchoesState } from '../../store';
 import { Store } from '@ngrx/store';
-import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  HostBinding,
+  Input,
+  OnInit,
+  Output,
+  ViewEncapsulation
+} from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/take';
 
 import { NowPlaylistService, YoutubePlayerService } from '../../services';
 import { getCurrentMedia, isPlayerPlaying, PlayerActions, YoutubePlayerState } from '../../store/youtube-player';
 
-import './youtube-player.scss';
-
 @Component({
   selector: 'player',
-  host: {
-    class: 'youtube-player'
-    // '[class.show-youtube-player]': '(player$ | async).showPlayer',
-    // '[class.fullscreen]': '(player$ | async).isFullscreen'
-  },
+  encapsulation: ViewEncapsulation.None,
+  styleUrls: [ './youtube-player.scss' ],
   template: `
   <section 
     [class.show-youtube-player]="(player$ | async).showPlayer"
@@ -46,10 +50,12 @@ import './youtube-player.scss';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class YoutubePlayer implements OnInit {
+export class YoutubePlayerComponent implements OnInit {
   player$: Observable<YoutubePlayerState>;
   media$: Observable<any>;
   isPlayerPlaying$: Observable<boolean>;
+
+  @HostBinding('class.youtube-player') style = true;
 
   constructor(
     private playerService: YoutubePlayerService,

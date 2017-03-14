@@ -6,7 +6,7 @@ import { EchoesState } from '../../store';
 import { NowPlaylistService } from '../../services/now-playlist.service';
 import { YoutubeMediaPlaylist } from '../../store/now-playlist';
 import { PlayerActions } from '../../store/youtube-player';
-import { NowPlaylist } from './now-playlist';
+import { NowPlaylistComponent } from './now-playlist';
 
 @Component({
   selector: 'now-playing',
@@ -29,9 +29,9 @@ import { NowPlaylist } from './now-playlist';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NowPlaying implements OnInit {
+export class NowPlayingComponent implements OnInit {
   public nowPlaylist: Observable<YoutubeMediaPlaylist>;
-  @ViewChild(NowPlaylist) nowPlaylistComponent: NowPlaylist;
+  @ViewChild(NowPlaylistComponent) nowPlaylistComponent: NowPlaylistComponent;
 
   constructor(
     private store: Store<EchoesState>,

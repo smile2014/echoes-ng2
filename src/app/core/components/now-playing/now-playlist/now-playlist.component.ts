@@ -5,16 +5,19 @@ import {
   Input,
   OnChanges,
   Output,
+  ViewEncapsulation
 } from '@angular/core';
 import { YoutubeMediaPlaylist } from '../../../store/now-playlist';
 import { fadeOutAnimation } from '../../../../shared/animations';
-import './now-playlist.scss';
+// import './now-playlist.scss';
 
 @Component({
   animations: [
     fadeOutAnimation()
   ],
   selector: 'now-playlist',
+  encapsulation: ViewEncapsulation.None,
+  styleUrls: [ './now-playlist.scss' ],
   template: `
   <section class="now-playlist ux-maker"
     >
@@ -51,7 +54,7 @@ import './now-playlist.scss';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NowPlaylist implements OnChanges {
+export class NowPlaylistComponent implements OnChanges {
   @Input() playlist: YoutubeMediaPlaylist;
   @Output() select = new EventEmitter();
   @Output() sort = new EventEmitter();

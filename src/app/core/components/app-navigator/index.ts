@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { SharedModule } from '../../../shared';
 
-import { Navigator } from './navigator.component';
+import { AppNavigatorComponent } from './app-navigator.component';
 
 @NgModule({
   imports: [
@@ -11,13 +11,13 @@ import { Navigator } from './navigator.component';
     RouterModule
   ],
   declarations: [
-    Navigator
+    AppNavigatorComponent
   ],
   exports: [
-    Navigator
+    AppNavigatorComponent
   ],
   providers: []
 })
-export class NavigatorModule { }
+export class AppNavigatorModule { }
 
 // export * from './navigator.component';

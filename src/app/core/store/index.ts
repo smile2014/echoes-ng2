@@ -10,14 +10,16 @@ import { combineReducers } from '@ngrx/store';
 import { compose } from '@ngrx/core/compose';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { getSidebarExpanded } from './app-layout';
-import { storeRegistry, registerReducers } from './store.registry';
+import { registerReducers } from './store.registry';
 
-import { reducersRegisters, EchoesState } from './reducers';
+import { getAppReducersRegistry, EchoesState } from './reducers';
 
 import { localStorageSync } from 'ngrx-store-localstorage';
 
 export { EchoesState } from './reducers';
-const { actions, reducers } = registerReducers(reducersRegisters);
+const storeAssets = registerReducers(getAppReducersRegistry());
+const actions = storeAssets.actions;
+const reducers = storeAssets.reducers;
 
 const composeStore = compose(
   localStorageSync(['videos', 'player', 'nowPlaylist', 'search', 'appLayout'], true),
@@ -26,10 +28,10 @@ const composeStore = compose(
 
 const optionalImports = [];
 
-if ('production' !== ENV) {
+// if ('production' !== ENV) {
     // Note that you must instrument after importing StoreModule
     optionalImports.push(StoreDevtoolsModule.instrumentOnlyWithExtension());
-}
+// }
 @NgModule({
   imports: [
     StoreModule.provideStore(composeStore),

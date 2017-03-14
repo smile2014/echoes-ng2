@@ -1,9 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 
-import './player-controls.scss';
+// import './player-controls.scss';
 
 @Component({
   selector: 'player-controls',
+  encapsulation: ViewEncapsulation.None,
+  styleUrls: [ './player-controls.scss' ],
   template: `
   <div class="btn-group player-controls">
       <button title="play previous track"

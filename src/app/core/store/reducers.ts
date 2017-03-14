@@ -18,13 +18,15 @@ export interface EchoesState {
   appLayout: AppLayout;
 };
 
-export const reducersRegisters = [
-  playerRegister,
-  nowPlaylistRegister,
-  userRegister,
-  searchRegister,
-  appLayoutRegister
-];
+export function getAppReducersRegistry() {
+  return [
+    playerRegister,
+    nowPlaylistRegister,
+    userRegister,
+    searchRegister,
+    appLayoutRegister
+  ];
+};
 
 export function getPlayer$ (state$: Observable<EchoesState>): Observable<YoutubePlayerState> {
   return state$.select(state => state.player);

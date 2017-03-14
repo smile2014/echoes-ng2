@@ -7,10 +7,13 @@ import effects from './effects';
 
 import { APP_SERVICES } from './services';
 
+export function bootstrapEffects() {
+  return effects.map((effect: any) => EffectsModule.run(effect));
+}
 @NgModule({
   imports: [
     CoreStoreModule,
-    ...effects.map(effect => EffectsModule.run(effect)),
+    ...bootstrapEffects(),
   ],
   declarations: [
   ],

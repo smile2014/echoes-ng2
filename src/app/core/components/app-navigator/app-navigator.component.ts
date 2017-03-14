@@ -1,10 +1,20 @@
 import { Route } from '@angular/router';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewEncapsulation
+} from '@angular/core';
 
-import './navigator.scss';
+// import './navigator.scss';
 
 @Component({
-  selector: 'navigator',
+  selector: 'app-navigator',
+  encapsulation: ViewEncapsulation.None,
+  styleUrls: [ './app-navigator.scss' ],
   template: `
   <ul class="nav nav-list nicer-ux library-nav navigator" navigator>
     <li *ngFor="let route of routes"
@@ -20,7 +30,7 @@ import './navigator.scss';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class Navigator implements OnInit {
+export class AppNavigatorComponent implements OnInit {
   private routes = [
     { link: '/', icon: 'fa fa-music', label: 'Explore' },
     { link: '/user', icon: 'fa fa-heart', label: 'My Profile' }

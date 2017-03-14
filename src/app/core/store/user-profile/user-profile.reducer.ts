@@ -70,3 +70,7 @@ export const getUserPlaylists$ = (state$: Observable<EchoesState>) => {
 export const getUserViewPlaylist$ = (state$: Observable<EchoesState>) => {
   return state$.select(state => state.user.viewedPlaylist);
 };
+export function getIsUserSignedIn$ (state$: Observable<EchoesState>) {
+  return state$.select(state => {
+    return state.user.access_token !== ''});
+};

@@ -4,7 +4,7 @@
 const { SpecReporter } = require('jasmine-spec-reporter');
 
 exports.config = {
-  allScriptsTimeout: 11000,
+  allScriptsTimeout: 15000,
   specs: [
     './e2e/**/*.e2e-spec.ts'
   ],
@@ -12,11 +12,11 @@ exports.config = {
     'browserName': 'chrome'
   },
   directConnect: true,
-  baseUrl: 'http://localhost:4200/',
-  framework: 'jasmine',
+  baseUrl: 'http://localhost:3000/',
+  framework: 'jasmine2',
   jasmineNodeOpts: {
     showColors: true,
-    defaultTimeoutInterval: 30000,
+    defaultTimeoutInterval: 40000,
     print: function() {}
   },
   beforeLaunch: function() {
@@ -25,6 +25,14 @@ exports.config = {
     });
   },
   onPrepare() {
+    browser.ignoreSynchronization = true;
     jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
-  }
+  },
+  /**
+   * Angular 2 configuration
+   *
+   * useAllAngular2AppRoots: tells Protractor to wait for any angular2 apps on the page instead of just the one matching
+   * `rootEl`
+   */
+   useAllAngular2AppRoots: true
 };

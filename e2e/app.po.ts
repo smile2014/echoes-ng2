@@ -5,7 +5,19 @@ export class EchoesPlayerPage {
     return browser.get('/');
   }
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+  getTitle() {
+    return browser.getTitle();
   }
+
+  getTitleInput() {
+    return element(by.css('input[formcontrolname=title]'));
+  }
+
+  getVideoResults() {
+    return element.all(by.css('youtube-videos youtube-list .youtube-list-item'));
+  }
+
+  // getTalkText(index: number) {
+  //   return this.getTalks().get(index).getText();
+  // }
 }

@@ -41,7 +41,13 @@ module.exports = function (config) {
     // if (process.env.TRAVIS){
     //   configuration.browsers = ['PhantomJS'];
     // }
-    browsers: ['Chrome'],
+    customLaunchers: {
+        Chrome_travis_ci: {
+            base: 'Chrome',
+            flags: ['--no-sandbox']
+        }
+    },
+    browsers: [process.env.TRAVIS ? 'Chrome_travis_ci' : 'Chrome'],
     singleRun: process.env.TRAVIS ? true : false
   });
 };

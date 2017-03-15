@@ -38,7 +38,10 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
+    // if (process.env.TRAVIS){
+    //   configuration.browsers = ['PhantomJS'];
+    // }
     browsers: ['Chrome'],
-    singleRun: false
+    singleRun: process.env.TRAVIS ? true : false
   });
 };

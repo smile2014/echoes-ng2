@@ -3,21 +3,27 @@ import { EffectsModule } from '@ngrx/effects';
 import { throwIfAlreadyLoaded } from './module-imports.guards';
 
 import { CoreStoreModule } from './store';
-import effects from './effects';
+import { AppEffects } from './effects';
 
 import { APP_SERVICES } from './services';
 
-const AppEffects = [
-  EffectsModule.run(effects[0]),
-  EffectsModule.run(effects[1]),
-  EffectsModule.run(effects[2]),
-  EffectsModule.run(effects[3])
+// export function AppEffectModules(effects: any[], runEffectFun) {
+//   return AppEffects.map(function(effect){
+//     return runEffectFun(effect);
+//   });
+// }
+const AppEffectModules = [
+  EffectsModule.run(AppEffects[0]),
+  EffectsModule.run(AppEffects[1]),
+  EffectsModule.run(AppEffects[2]),
+  EffectsModule.run(AppEffects[3])
 ];
 
 @NgModule({
   imports: [
     CoreStoreModule,
-    // ...AppEffects,
+    // ...AppEffectModules(AppEffects, EffectsModule.run),
+    ...AppEffectModules,
   ],
   declarations: [
   ],

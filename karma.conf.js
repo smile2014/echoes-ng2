@@ -7,6 +7,7 @@ module.exports = function (config) {
     frameworks: ['jasmine', '@angular/cli'],
     plugins: [
       require('karma-jasmine'),
+      require('karma-phantomjs-launcher'),
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
@@ -44,9 +45,6 @@ module.exports = function (config) {
   if (process.env.TRAVIS) {
     options.singleRun = true;
     options.browsers = [ 'PhantomJS' ];
-    options.plugins.push(require('karma-phantomjs-launcher'));
-    options.plugins.push(require('core-js/es6'));
-    options.plugins.push(require('core-js/es7/reflect'));
   }
   config.set(options);
 };

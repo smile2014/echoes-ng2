@@ -1,51 +1,46 @@
 import { Observable } from 'rxjs/Rx';
 import { NgModule } from '@angular/core';
-import { StoreModule } from '@ngrx/store';
-import 'rxjs/add/operator/let';
-
-import { ActionCreatorFactory } from 'ngrx-action-creator-factory';
-// import { NgrxActionCreatorFactoryModule } from './action-creator.util';
-
-import { combineReducers } from '@ngrx/store';
+import { StoreModule, combineReducers } from '@ngrx/store';
 import { compose } from '@ngrx/core/compose';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { localStorageSync } from 'ngrx-store-localstorage';
+import 'rxjs/add/operator/let';
+
+// import { ActionCreatorFactory } from 'ngrx-action-creator-factory';
+// import { NgrxActionCreatorFactoryModule } from './action-creator.util';
+
+import { environment } from '../../../environments/environment';
 import { getSidebarExpanded } from './app-layout';
+import { getAppReducersRegistry, EchoesState, EchoesReducers, EchoesActions } from './reducers';
 // import { registerReducers } from './store.registry';
 
-import { getAppReducersRegistry, EchoesState, EchoesReducers, EchoesActions } from './reducers';
-
-import { localStorageSync } from 'ngrx-store-localstorage';
+// import { storeFreeze } from 'ngrx-store-freeze';
 
 export { EchoesState } from './reducers';
 // const storeAssets = registerReducers(getAppReducersRegistry());
 const actions = EchoesActions; //storeAssets.actions;
 const reducers = EchoesReducers; //storeAssets.reducers;
-const storageConfig = ['videos', 'player', 'nowPlaylist', 'search', 'appLayout'];
-// TODO - error thrown with compose 
-// ERROR in Error encountered resolving symbol values statically. 
-//Function calls are not supported. 
-//Consider replacing the function or lambda with a reference to an exported function 
-//(position 12:42 in the original .ts file), resolving symbol compose in 
-// /Projects/echoes-player/node_modules/@ngrx/core/compose.d.ts, 
-// const composeStore = compose(
-  // localStorageSync(storageConfig, true),
-  // combineReducers
-// )(reducers);
+// const storageConfig = ['videos', 'player', 'nowPlaylist', 'search', 'appLayout'];
 const composeStore = reducers;
 const optionalImports = [];
-
-// if ('production' !== ENV) {
+const productionReducer = compose(localStorageSync(Object.keys(reducers), true), combineReducers)(reducers);
+// const productionReducer = combineReducers(reducers);
+// This is required for AOT
+export function appReducer(state: any, action: any) {
+  return productionReducer(state, action);
+}
+if (!environment.production) {
     // Note that you must instrument after importing StoreModule
     optionalImports.push(StoreDevtoolsModule.instrumentOnlyWithExtension());
-// }
+}
 @NgModule({
   imports: [
-    StoreModule.provideStore(composeStore),
+    StoreModule.provideStore(appReducer),
     ...optionalImports
   ],
   declarations: [],
   exports: [],
-  providers: [ ...actions, ActionCreatorFactory ]
+  providers: [ ...actions ]
 })
 export class CoreStoreModule {};
 

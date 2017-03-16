@@ -13,6 +13,8 @@ install:
   - npm install karma-phantomjs-launcher
   - npm install
 before_script: null
+script:
+  - npm run test:ci
 after_script:
   - process.exit()
 after_success:

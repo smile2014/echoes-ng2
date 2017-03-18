@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import { NgModule } from '@angular/core';
 import { StoreModule, combineReducers } from '@ngrx/store';
 import { compose } from '@ngrx/core/compose';

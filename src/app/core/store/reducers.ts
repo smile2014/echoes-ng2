@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 // reducers
 import { playerRegister, YoutubePlayerState, player, PlayerActions } from './youtube-player';
 import { nowPlaylistRegister, YoutubeMediaPlaylist, nowPlaylist, NowPlaylistActions } from './now-playlist';

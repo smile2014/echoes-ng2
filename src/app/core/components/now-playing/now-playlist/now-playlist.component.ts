@@ -22,13 +22,13 @@ const animationRule = [options.duration, options.animationTimingFunction].join('
     trigger('fadeIn', [
       state('void', style({ opacity: 0, transform: 'translateY(-30%)' })),
       transition(':enter', [
-        animate(animationRule, style({
+        animate('300ms ease-out', style({
           opacity: 1,
           transform: 'translateY(0%)'
         }))
       ]),
       transition(':leave', [
-        animate(animationRule, style({
+        animate('300ms ease-out', style({
           opacity: 0,
           transform: 'translatex(-80%)'
         }))

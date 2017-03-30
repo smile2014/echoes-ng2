@@ -18,8 +18,8 @@ import { getAppReducersRegistry, EchoesState, EchoesReducers, EchoesActions } fr
 
 export { EchoesState } from './reducers';
 // const storeAssets = registerReducers(getAppReducersRegistry());
-const actions = EchoesActions; //storeAssets.actions;
-const reducers = EchoesReducers; //storeAssets.reducers;
+const actions = EchoesActions; // storeAssets.actions;
+const reducers = EchoesReducers; // storeAssets.reducers;
 // const storageConfig = ['videos', 'player', 'nowPlaylist', 'search', 'appLayout'];
 const composeStore = reducers;
 const optionalImports = [];

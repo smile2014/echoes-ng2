@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs/Rx';
 import { Injectable, NgZone } from '@angular/core';
 import { Http } from '@angular/http';
-import { window } from '@angular/platform-browser/src/facade/browser';
+// import { window } from '@angular/platform-browser/src/facade/browser';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/operator/do';
@@ -18,7 +18,7 @@ import { GapiLoader } from './gapi-loader.service';
 @Injectable()
 export class Authorization {
   private _googleAuth: gapi.auth2.GoogleAuth;
-  private _scope: string = 'profile email https://www.googleapis.com/auth/youtube';
+  private _scope = 'profile email https://www.googleapis.com/auth/youtube';
   private _accessToken: string;
   private autoSignInTimer: Subscription;
 
@@ -59,7 +59,7 @@ export class Authorization {
       client_id: `${CLIENT_ID}.apps.googleusercontent.com`,
       scope: this._scope
     };
-    return Observable.fromPromise(window.gapi.auth2.init(authOptions));
+    return Observable.fromPromise(window['gapi'].auth2.init(authOptions));
   }
 
   private hasAccessToken (googleAuth: gapi.auth2.GoogleAuth): boolean {
@@ -72,7 +72,7 @@ export class Authorization {
   }
 
   private listenToGoogleAuthSignIn (googleAuth: gapi.auth2.GoogleAuth) {
-    window.gapi['auth2'].getAuthInstance().isSignedIn.listen(authState => {
+    window['gapi']['auth2'].getAuthInstance().isSignedIn.listen(authState => {
       console.log('authState changed', authState);
     });
   }

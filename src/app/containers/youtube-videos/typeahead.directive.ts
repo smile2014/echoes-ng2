@@ -31,14 +31,14 @@ enum Key {
  using an external template:
  <input [typeaheadTpl]="itemTpl" >
 
-  <template #itemTpl let-result>
+  <ng-template #itemTpl let-result>
     <strong>MY {{ result.result }}</strong>
-  </template>
+  </ng-template>
 */
 @Component({
   selector: '[typeahead]',
   template: `
-  <template #suggestionsTplRef>
+  <ng-template #suggestionsTplRef>
   <section class="list-group results" *ngIf="showSuggestions">
     <div class="typeahead-backdrop" (click)="hideSuggestions()"></div>
     <button type="button" class="list-group-item"
@@ -46,13 +46,13 @@ enum Key {
       [class.active]="markIsActive(i, result)"
       (click)="handleSelectSuggestion(result)">
       <span *ngIf="!typeaheadItemTpl"><i class="fa fa-search"></i> {{ result }}</span>
-      <template
+      <ng-template
         [ngTemplateOutlet]="typeaheadItemTpl" 
         [ngOutletContext]="{ $implicit: {result: result, index: i} }"
-      ></template>
+      ></ng-template>
     </button>
   </section>
-  </template>
+  </ng-template>
   `,
   styles: [`
   .typeahead-backdrop {

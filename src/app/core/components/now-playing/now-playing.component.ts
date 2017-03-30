@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 
 import { EchoesState } from '../../store';
 import { NowPlaylistService } from '../../services/now-playlist.service';
-import { YoutubeMediaPlaylist } from '../../store/now-playlist';
+import { NowPlaylistInterface } from '../../store/now-playlist';
 import { PlayerActions } from '../../store/youtube-player';
 import { NowPlaylistComponent } from './now-playlist';
 
@@ -30,7 +30,7 @@ import { NowPlaylistComponent } from './now-playlist';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NowPlayingComponent implements OnInit {
-  public nowPlaylist: Observable<YoutubeMediaPlaylist>;
+  public nowPlaylist: Observable<NowPlaylistInterface>;
   @ViewChild(NowPlaylistComponent) nowPlaylistComponent: NowPlaylistComponent;
 
   constructor(

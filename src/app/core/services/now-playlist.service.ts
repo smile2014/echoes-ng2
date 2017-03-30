@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { EchoesState } from '../store';
-import { NowPlaylistActions, YoutubeMediaPlaylist } from '../store/now-playlist';
+import { NowPlaylistActions, NowPlaylistInterface } from '../store/now-playlist';
 import { YoutubeVideosInfo } from './youtube-videos-info.service';
 
 @Injectable()
 export class NowPlaylistService {
-  public playlist$: Observable<YoutubeMediaPlaylist>;
+  public playlist$: Observable<NowPlaylistInterface>;
 
   constructor(
     public store: Store<EchoesState>,
@@ -69,7 +69,7 @@ export class NowPlaylistService {
   }
 
   isInLastTrack(): boolean {
-    let nowPlaylist: YoutubeMediaPlaylist;
+    let nowPlaylist: NowPlaylistInterface;
     this.playlist$.take(1).subscribe(_nowPlaylist => nowPlaylist = _nowPlaylist);
     const currentVideoId = nowPlaylist.selectedId;
     const indexOfCurrentVideo = nowPlaylist.videos.findIndex(video => video.id === currentVideoId);

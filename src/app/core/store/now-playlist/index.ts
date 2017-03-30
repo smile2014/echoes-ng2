@@ -1,3 +1,2 @@
-// export * from './now-playlist.effects';
-export * from './now-playlist.reducer';
-export * from './now-playlist.actions';
+export { nowPlaylist, NowPlaylistInterface, nowPlaylistRegister} from './now-playlist.reducer';
+export { NowPlaylistActions } from './now-playlist.actions';

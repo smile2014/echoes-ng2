@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs/Observable';
 // reducers
 import { playerRegister, YoutubePlayerState, player, PlayerActions } from './youtube-player';
-import { nowPlaylistRegister, YoutubeMediaPlaylist, nowPlaylist, NowPlaylistActions } from './now-playlist';
+import { nowPlaylistRegister, NowPlaylistInterface, nowPlaylist, NowPlaylistActions } from './now-playlist';
 import { userRegister, UserProfileData, user, UserProfileActions } from './user-profile';
 import { searchRegister, PlayerSearch, search, PlayerSearchActions } from './player-search';
 import { appLayoutRegister, AppLayout, appLayout, AppLayoutActions } from './app-layout';
@@ -12,7 +12,7 @@ import { appLayoutRegister, AppLayout, appLayout, AppLayoutActions } from './app
  */
 export interface EchoesState {
   player: YoutubePlayerState;
-  nowPlaylist: YoutubeMediaPlaylist;
+  nowPlaylist: NowPlaylistInterface;
   user: UserProfileData;
   search: PlayerSearch;
   appLayout: AppLayout;
@@ -60,6 +60,6 @@ export function getAppLayout$ ($state: Observable<EchoesState>): Observable<AppL
   return $state.select(state => state.appLayout);
 };
 
-export function getNowPlaylist$ ($state: Observable<EchoesState>): Observable<YoutubeMediaPlaylist> {
+export function getNowPlaylist$ ($state: Observable<EchoesState>): Observable<NowPlaylistInterface> {
   return $state.select(state => state.nowPlaylist);
 };

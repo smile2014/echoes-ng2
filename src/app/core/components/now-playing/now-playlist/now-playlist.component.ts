@@ -5,11 +5,12 @@ import {
   Input,
   OnChanges,
   Output,
-  ViewEncapsulation
+  ViewEncapsulation,
+  AfterViewChecked, NgZone
 } from '@angular/core';
-import { YoutubeMediaPlaylist } from '../../../store/now-playlist';
+import { NowPlaylistInterface } from '../../../store/now-playlist';
 import { fadeOutAnimation } from '../../../../shared/animations';
-import { animate, state, style, transition, trigger } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 const options = {
   duration: '0.3s',
@@ -74,23 +75,29 @@ const animationRule = [options.duration, options.animationTimingFunction].join('
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NowPlaylistComponent implements OnChanges {
-  @Input() playlist: YoutubeMediaPlaylist;
+export class NowPlaylistComponent implements OnChanges, AfterViewChecked {
+  @Input() playlist: NowPlaylistInterface;
   @Output() select = new EventEmitter();
   @Output() sort = new EventEmitter();
   @Output() remove = new EventEmitter();
 
   private activeTrackElement: HTMLUListElement;
+  private hasActiveChanged = false;
 
-  constructor() { }
+  constructor(private zone: NgZone) { }
+
+  ngAfterViewChecked() {
+    if (this.hasActiveChanged && this.activeTrackElement) {
+      this.zone.runOutsideAngular(() => this.scrollToActiveTrack());
+    }
+  }
 
   ngOnChanges(changes) {
-    const hasChanges = this.hasChanges(changes.playlist);
-    const currentPlaylist = hasChanges && changes.playlist.currentValue.videos;
-    const prevPlaylist = hasChanges && changes.playlist.previousValue.videos;
-    if (hasChanges && this.activeTrackElement && !this.hasVideoRemoved(currentPlaylist, prevPlaylist)) {
-      this.scrollToActiveTrack();
-    }
+    const activeId = changes.activeId;
+    const hasChanges = this.hasChanges(activeId);
+    const currentValue = hasChanges && changes.activeId.currentValue;
+    const prevValue = hasChanges && changes.activeId.previousValue;
+    this.hasActiveChanged = currentValue !== prevValue;
   }
 
   scrollToActiveTrack() {
@@ -133,6 +140,6 @@ export class NowPlaylistComponent implements OnChanges {
   }
 
   private hasChanges(changes) {
-    return changes.hasOwnProperty('currentValue') && changes.hasOwnProperty('previousValue');
+    return changes && changes.hasOwnProperty('currentValue') && changes.hasOwnProperty('previousValue');
   }
 }

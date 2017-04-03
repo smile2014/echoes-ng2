@@ -7,6 +7,8 @@
     "start": "ng serve",
     "build": "ng build",
     "build:prod": "ng build -prod",
+    "copy:heroku": "cp -r ./config/heroku/ ./dist",
+    "copy:domain": "cp CNAME ./dist",
     "test": "ng test",
     "test:ci": "ng test --single-run",
     "lint": "ng lint",
@@ -55,6 +57,7 @@
     "ngrx-action-creator-factory": "0.0.1",
     "ngrx-store-localstorage": "0.1.5",
     "protractor": "~5.1.0",
+    "shx": "0.2.2",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
     "typescript": "~2.2.0"

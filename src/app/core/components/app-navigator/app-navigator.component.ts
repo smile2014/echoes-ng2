@@ -31,7 +31,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppNavigatorComponent implements OnInit {
-  private routes = [
+  public routes = [
     { link: '/', icon: 'fa fa-music', label: 'Explore' },
     { link: '/user', icon: 'fa fa-heart', label: 'My Profile' }
   ];

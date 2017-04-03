@@ -50,8 +50,8 @@ import { EchoesState } from '../../core/store';
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppNavbar implements OnInit {
-  private user$: Observable<UserProfileData>;
-  private isCollapsed: boolean = true;
+  user$: Observable<UserProfileData>;
+  isCollapsed = true;
 
   // @Input() profile: GoogleBasicProfile = {};
 

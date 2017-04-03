@@ -9,7 +9,8 @@ import './youtube-playlist.scss';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class YoutubePlaylistComponent {
-  @Input() media: GoogleApiYouTubePlaylistResource;
+  // GoogleApiYouTubePlaylistResource
+  @Input() media: any;
   @Output() play = new EventEmitter();
   @Output() queue = new EventEmitter();
 

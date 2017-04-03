@@ -1,3 +1,4 @@
+import { getPlayer$, getCurrentMedia$, getIsPlayerPlaying$ } from '../../store/youtube-player/youtube-player.selectors';
 import { EchoesState } from '../../store';
 import { Store } from '@ngrx/store';
 import {
@@ -14,7 +15,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/take';
 
 import { NowPlaylistService, YoutubePlayerService } from '../../services';
-import { getCurrentMedia, isPlayerPlaying, PlayerActions, YoutubePlayerState } from '../../store/youtube-player';
+import { PlayerActions, YoutubePlayerState } from '../../store/youtube-player';
 
 @Component({
   selector: 'player',
@@ -51,9 +52,9 @@ import { getCurrentMedia, isPlayerPlaying, PlayerActions, YoutubePlayerState } f
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class YoutubePlayerComponent implements OnInit {
-  player$: Observable<YoutubePlayerState>;
-  media$: Observable<any>;
-  isPlayerPlaying$: Observable<boolean>;
+  player$ = this.store.let(getPlayer$);
+  media$ = this.store.let(getCurrentMedia$);
+  isPlayerPlaying$ = this.store.let(getIsPlayerPlaying$);
 
   @HostBinding('class.youtube-player') style = true;
 
@@ -66,9 +67,6 @@ export class YoutubePlayerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.player$ = this.playerService.player$;
-    this.media$ = getCurrentMedia(this.player$);
-    this.isPlayerPlaying$ = isPlayerPlaying(this.player$);
     this.store.dispatch(this.playerActions.reset());
   }
 

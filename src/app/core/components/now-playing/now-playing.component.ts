@@ -13,14 +13,14 @@ import { NowPlaylistComponent } from './now-playlist';
   template: `
   <div class="sidebar-pane">
     <now-playlist-filter
-      [playlist]="nowPlaylist | async"
+      [playlist]="nowPlaylist$ | async"
       (clear)="clearPlaylist()"
       (filter)="updateFilter($event)"
       (reset)="resetFilter()"
       (headerClick)="onHeaderClick()"
     ></now-playlist-filter>
     <now-playlist
-      [playlist]="nowPlaylist | async"
+      [playlist]="nowPlaylist$ | async"
       (select)="selectVideo($event)"
       (sort)="sortVideo($event)"
       (remove)="removeVideo($event)"
@@ -30,7 +30,7 @@ import { NowPlaylistComponent } from './now-playlist';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NowPlayingComponent implements OnInit {
-  public nowPlaylist: Observable<NowPlaylistInterface>;
+  public nowPlaylist$: Observable<NowPlaylistInterface>;
   @ViewChild(NowPlaylistComponent) nowPlaylistComponent: NowPlaylistComponent;
 
   constructor(
@@ -40,7 +40,7 @@ export class NowPlayingComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.nowPlaylist = this.nowPlaylistService.playlist$;
+    this.nowPlaylist$ = this.nowPlaylistService.playlist$;
   }
 
   selectVideo (media: GoogleApiYouTubeVideoResource) {

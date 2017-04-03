@@ -77,9 +77,9 @@ const animationRule = [options.duration, options.animationTimingFunction].join('
 })
 export class NowPlaylistComponent implements OnChanges, AfterViewChecked {
   @Input() playlist: NowPlaylistInterface;
-  @Output() select = new EventEmitter();
-  @Output() sort = new EventEmitter();
-  @Output() remove = new EventEmitter();
+  @Output() select = new EventEmitter<GoogleApiYouTubeSearchResource>();
+  @Output() sort = new EventEmitter<GoogleApiYouTubeSearchResource>();
+  @Output() remove = new EventEmitter<GoogleApiYouTubeSearchResource>();
 
   private activeTrackElement: HTMLUListElement;
   private hasActiveChanged = false;
@@ -106,7 +106,7 @@ export class NowPlaylistComponent implements OnChanges, AfterViewChecked {
     }
   }
 
-  selectVideo (media) {
+  selectVideo (media: GoogleApiYouTubeSearchResource) {
     this.select.next(media);
   }
 
@@ -114,7 +114,7 @@ export class NowPlaylistComponent implements OnChanges, AfterViewChecked {
     this.remove.next(media);
   }
 
-  sortVideo (media) {
+  sortVideo (media: GoogleApiYouTubeSearchResource) {
     this.sort.next(media);
   }
 

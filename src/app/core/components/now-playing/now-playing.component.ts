@@ -22,11 +22,11 @@ import { NowPlaylistComponent } from './now-playlist';
     <now-playlist
       [playlist]="nowPlaylist$ | async"
       (select)="selectVideo($event)"
-      (sort)="sortVideo($event)"
       (remove)="removeVideo($event)"
     ></now-playlist>
   </div>
   `,
+      // (sort)="sortVideo($event)"
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NowPlayingComponent implements OnInit {
@@ -34,9 +34,9 @@ export class NowPlayingComponent implements OnInit {
   @ViewChild(NowPlaylistComponent) nowPlaylistComponent: NowPlaylistComponent;
 
   constructor(
-    private store: Store<EchoesState>,
+    public store: Store<EchoesState>,
     public nowPlaylistService: NowPlaylistService,
-    private playerActions: PlayerActions
+    public playerActions: PlayerActions
   ) {}
 
   ngOnInit() {

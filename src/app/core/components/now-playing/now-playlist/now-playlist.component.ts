@@ -6,19 +6,13 @@ import {
   OnChanges,
   Output,
   ViewEncapsulation,
-  AfterViewChecked, NgZone
+  AfterViewChecked, NgZone,
 } from '@angular/core';
 import { NowPlaylistInterface } from '../../../store/now-playlist';
-import { fadeOutAnimation } from '../../../../shared/animations';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
-const options = {
-  duration: '0.3s',
-  animationTimingFunction: 'linear'
-};
-const animationRule = [options.duration, options.animationTimingFunction].join(' ');
-
 @Component({
+  selector: 'now-playlist',
   animations: [
     trigger('fadeIn', [
       state('void', style({ opacity: 0, transform: 'translateY(-30%)' })),
@@ -36,12 +30,10 @@ const animationRule = [options.duration, options.animationTimingFunction].join('
       ])
     ])
   ],
-  selector: 'now-playlist',
   encapsulation: ViewEncapsulation.None,
   styleUrls: [ './now-playlist.scss' ],
   template: `
-  <section class="now-playlist ux-maker"
-    >
+  <section class="now-playlist ux-maker">
     <ul class="nav nav-list ux-maker nicer-ux">
       <li class="now-playlist-track" #playlistTrack
         [ngClass]="{
@@ -78,13 +70,13 @@ const animationRule = [options.duration, options.animationTimingFunction].join('
 export class NowPlaylistComponent implements OnChanges, AfterViewChecked {
   @Input() playlist: NowPlaylistInterface;
   @Output() select = new EventEmitter<GoogleApiYouTubeSearchResource>();
-  @Output() sort = new EventEmitter<GoogleApiYouTubeSearchResource>();
+  // @Output() sort = new EventEmitter<GoogleApiYouTubeSearchResource>();
   @Output() remove = new EventEmitter<GoogleApiYouTubeSearchResource>();
 
-  private activeTrackElement: HTMLUListElement;
-  private hasActiveChanged = false;
+  public activeTrackElement: HTMLUListElement;
+  public hasActiveChanged = false;
 
-  constructor(private zone: NgZone) { }
+  constructor(public zone: NgZone) { }
 
   ngAfterViewChecked() {
     if (this.hasActiveChanged && this.activeTrackElement) {
@@ -115,7 +107,7 @@ export class NowPlaylistComponent implements OnChanges, AfterViewChecked {
   }
 
   sortVideo (media: GoogleApiYouTubeSearchResource) {
-    this.sort.next(media);
+    // this.sort.next(media);
   }
 
   isActiveMedia(mediaId: string, trackElement: HTMLUListElement) {

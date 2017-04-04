@@ -41,9 +41,9 @@ import { PlayerActions, YoutubePlayerState } from '../../store/youtube-player';
       <player-controls class="col-md-4 col-xs-5 controls-container nicer-ux" 
         [class.yt-playing]="isPlayerPlaying$ | async"
         [media]="media$ | async"
-        (play)="playVideo($event)" 
-        (pause)="pauseVideo()" 
+        (pause)="pauseVideo()"
         (next)="playNextTrack()"
+        (play)="playVideo($event)"
         (previous)="playPreviousTrack()"
       ></player-controls>
     </div>
@@ -82,7 +82,7 @@ export class YoutubePlayerComponent implements OnInit {
     }
   }
 
-  playVideo (media: any) {
+  playVideo (media: GoogleApiYouTubeVideoResource) {
     this.store.dispatch(this.playerActions.playVideo(media));
   }
 
@@ -98,12 +98,12 @@ export class YoutubePlayerComponent implements OnInit {
     this.playerService.setSize();
   }
 
-  playNextTrack (player) {
+  playNextTrack () {
     this.nowPlaylistService.selectNextIndex();
     this.store.dispatch(this.playerActions.playVideo(this.nowPlaylistService.getCurrent()));
   }
 
-  playPreviousTrack (player) {
+  playPreviousTrack () {
     this.nowPlaylistService.selectPreviousIndex();
     this.store.dispatch(this.playerActions.playVideo(this.nowPlaylistService.getCurrent()));
   }
